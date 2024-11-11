@@ -1,0 +1,5 @@
+---
+name: linear_warmup
+warmup_start_lr: 0
+warmup_steps: 10
+use_cosine_decay: false

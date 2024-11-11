@@ -1,0 +1,11 @@
+---
+name: composed
+projection_loss: normalized_projection
+linearize_objective: false
+project_normalized_pc: true
+time_loss: mse
+metric_loss: mse
+lambda_proj: 1.0
+lambda_time: 1.0
+lambda_metric: 1.0
+n_mask_samples: 4000

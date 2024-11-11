@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "rmp"
+version = "1.0"
+description = "Deformable Surface Reconstruction via Riemannian Metric Preservation"
+readme = "README.md"
+requires-python = ">=3.10.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python",
+]
+dependencies = [
+    "numpy",
+    "hydra-core",
+    "hydra-optuna-sweeper",
+    "hydra-joblib-launcher",
+    "wandb",
+    "torch",
+    "tqdm",
+    "matplotlib",
+    "opencv-python",
+    "scikit-image",
+    "natsort",
+    "open3d",
+]
+
+
+[project.optional-dependencies]
+dev = ["black >= 24.4.2", "isort >= 5.13.2", "flake8 >= 7.0", "Flake8-pyproject >= 1.2"]
+conformal = ["pymeshlab"]
+
+
+[tool.black]
+line-length = 100
+preview = true
+enable-unstable-feature = ["hug_parens_with_braces_and_square_brackets"]
+
+
+[tool.flake8]
+max-line-length = 100
+# Use extend-ignore to add to already ignored checks which are anti-patterns like W503.
+extend-ignore = [
+    # PEP 8 recommends to treat : in slices as a binary operator with the lowest priority, and to leave an equal
+    # amount of space on either side, except if a parameter is omitted (e.g. ham[1 + 1 :]).
+    # This behaviour may raise E203 whitespace before ':' warnings in style guide enforcement tools like Flake8.
+    # Since E203 is not PEP 8 compliant, we tell Flake8 to ignore this warning.
+    # https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#slices
+    "E203"
+]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+known_first_party = ["rmp"]

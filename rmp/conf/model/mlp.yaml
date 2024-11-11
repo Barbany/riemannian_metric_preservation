@@ -1,0 +1,13 @@
+---
+name: mlp
+activation: softplus
+pos_enc: false
+num_layers: 1
+hidden_size_first: 128
+hidden_size_mid: 256
+hidden_size_last: 128
+batch_norm: false
+include_input: true
+log_sampling: True
+multires: 10
+skips: [2]

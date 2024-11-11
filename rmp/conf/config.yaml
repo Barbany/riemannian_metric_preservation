@@ -1,0 +1,45 @@
+---
+defaults:
+  - _self_
+  - model: mlp
+  - loss: composed
+  - optim@optim_template: adam
+  - scheduler@scheduler_template: none
+  - optim@optim_frame: adam
+  - scheduler@scheduler_frame: none
+  - override hydra/sweeper: optuna
+  - override hydra/hydra_logging: disabled
+  - override hydra/launcher: joblib
+seed: 123
+use_wandb: false
+gradient_clip: null
+center_control_points: false
+use_cpu: false
+patience_template: 300
+max_iters: 200
+patience_update: 50
+normalize_pc: true
+matches: cropped_cotrack_matches
+dataset_root: ${oc.env:HOME}/riemannian_metric_preservation/datasets
+dataset: DeSurT
+sequence: brick
+use_conformal_map: false
+dataset_dir: ${dataset_root}/${dataset}/${sequence}
+data_augmentation:
+  samples_per_face: 2
+  samples_per_border: 3
+hydra:
+  output_subdir:
+  run:
+    dir: ${oc.env:HOME}/riemannian_metric_preservation/outputs/${dataset}/${sequence}/${hydra.job.override_dirname}
+  job:
+    chdir: true
+    config:
+      override_dirname:
+        exclude_keys:
+          - seed
+          - use_wandb
+          - dataset
+          - sequence
+          - dataset_root
+          - use_cpu
